@@ -44,8 +44,9 @@ class Transaction
     SqlRunner.run( sql, values )
   end
   def self.find_transactions_by_catogory()
-    sql="SELECT categories.name  ,SUM( transactions.amount) FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name;"
-    SqlRunner.run( sql)
+    sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name;"
+     results = SqlRunner.run( sql)
+    return results.map { |transaction| TransactionDto.new( transaction ) }
   end
   def self.find_transactions_by_merchant()
     sql ="SELECT SUM( transactions.amount), merchants.name   FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id GROUP BY  merchants.name;"

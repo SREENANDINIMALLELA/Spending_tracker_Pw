@@ -9,3 +9,8 @@ get '/spending_tracker' do
 
 erb(:"show_all")
 end
+
+get '/spending_tracker/category' do
+ @transactions = Transaction.find_transactions_by_catogory()
+erb(:"show_by_category")
+end

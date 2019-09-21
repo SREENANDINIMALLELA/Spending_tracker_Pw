@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Amount</th>
+  </tr>
+  <%@transactions.each do |transaction|%>
+  <tr>
+    <td><%=transaction.category_name %></td>
+      <td><%= transaction.amount %></td>
+  </tr>
+  <% end %>
+</table>
