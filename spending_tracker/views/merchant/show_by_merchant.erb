@@ -1,19 +1,15 @@
 <table>
   <tr>
     <th>merchant</th>
-    <th>  </th>
     <th>Amount</th>
-    <th>      </th>
     <th>frequency</th>
 
   </tr>
   <%@transactions.each do |transaction|%>
   <tr>
     <td><%=transaction.merchant_name %></td>
-    <td>         </td>
-      <td><%= transaction.amount %></td>
-      <td>          </td>
-      <td><%= transaction.frequency %></td>
+    <td><%= transaction.amount %></td>
+    <td><%= transaction.frequency %></td>
 
   </tr>
   <% end %>
