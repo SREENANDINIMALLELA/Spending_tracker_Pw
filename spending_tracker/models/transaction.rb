@@ -3,7 +3,7 @@ class Transaction
   attr_accessor :merchant_id , :amount,:category_id
   attr_reader :id
   def initialize(options)
-    @id = options['id'].to_i()
+    # @id = options['id'].to_i()
     @category_id = options['category_id'].to_i
     @merchant_id = options['merchant_id'].to_i
     @amount= options['amount'].to_i
@@ -27,9 +27,9 @@ class Transaction
   end
 
   def self.all()
-    sql = "SELECT * FROM transactions"
+    sql = "SELECT categories.name AS category_name , merchants.name as merchant_name , transactions.amount from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id;"
     results = SqlRunner.run( sql )
-    return results.map { |transaction| Transaction.new( transaction ) }
+    return results.map { |transaction| TransactionDto.new( transaction ) }
   end
 
   def self.delete_all()
@@ -43,5 +43,14 @@ class Transaction
     values = [id]
     SqlRunner.run( sql, values )
   end
+  def self.find_transactions_by_catogory()
+    sql="SELECT categories.name  ,SUM( transactions.amount) FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name;"
+    SqlRunner.run( sql)
+  end
+  def self.find_transactions_by_merchant()
+    sql ="SELECT SUM( transactions.amount), merchants.name   FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id GROUP BY  merchants.name;"
+    SqlRunner.run( sql)
+  end
+
 
 end
