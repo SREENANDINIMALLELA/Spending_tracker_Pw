@@ -1,4 +1,5 @@
 require_relative('../db/sql_runner')
+
 class Transaction
   attr_accessor :merchant_id , :amount,:category_id
   attr_reader :id
@@ -43,14 +44,15 @@ class Transaction
     values = [id]
     SqlRunner.run( sql, values )
   end
-  def self.find_transactions_by_catogory()
-    sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name;"
+  def self.find_transactions_by_category()
+    sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name"
      results = SqlRunner.run( sql)
-    return results.map { |transaction| TransactionDto.new( transaction ) }
+    return results.map { |transaction| CategoryDto.new( transaction ) }
   end
   def self.find_transactions_by_merchant()
-    sql ="SELECT SUM( transactions.amount), merchants.name   FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id GROUP BY  merchants.name;"
-    SqlRunner.run( sql)
+    sql ="SELECT count (merchants.name) as frequency , merchants.name as merchant_name , SUM( transactions.amount) as amount  FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id GROUP BY  merchants.name"
+    results=SqlRunner.run( sql)
+    return results.map { |transaction| MerchantDto.new( transaction ) }
   end
 
 
