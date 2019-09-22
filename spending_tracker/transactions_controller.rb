@@ -9,13 +9,15 @@ require_relative( 'dtos/groupby_category_dto' )
 require_relative( 'dtos/groupby_merchant_dto' )
 require_relative( 'dtos/category_dto' )
 require_relative( 'dtos/customer_dto' )
+require_relative( 'services/transaction_service' )
 
 also_reload( '../models/*' )
 
 get '/spending_tracker' do
- @transactions = Transaction.all()
- @customer = Customer.find(7)
- 
+ @transactions = TransactionService.getAllTransactions()
+ @total_amount = TransactionService.getTotalAmount(@transactions)
+ @customer = Customer.find(1)
+p @customer
 
 erb(:'transaction/show_all')
 end

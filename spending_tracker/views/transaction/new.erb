@@ -2,7 +2,7 @@
   <label for="categories">Category :</label>
   <select id="categories" name="category_id">
     <%@categories.each do |category|%>
-      <option value=<%= p category.id %>> <%=category.name %></option>
+      <option value=<%= category.id %>> <%=category.name %></option>
     <% end %>
     </select>
       <label for="merchants">Merchant :</label>
@@ -15,17 +15,3 @@
     <input id= "amount" type="number" name="amount" >
     <input type="submit" value="Add transaction"/>
 </form>
-
-
-
-
-
-
-<!-- <select name="owner">
-<?php
-$sql = mysqli_query($connection, "SELECT username FROM users");
-while ($row = $sql->fetch_assoc()){
-echo "<option value=\"owner1\">" . $row['username'] . "</option>";
-}
-?>
-</select> -->

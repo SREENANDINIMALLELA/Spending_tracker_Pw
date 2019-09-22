@@ -1,7 +1,6 @@
 
-<% transTotal = TransactionDto.total_amount%>
-<p> Remaining Balance : <%=  p @customer.wallet - transTotal %></p>
-
+<p> Your Balance : <%= @customer.wallet - @total_amount %></p>
+<p> Remainig preference budget : <%= @customer.budget - @total_amount  %></p>
 <table>
   <tr>
     <th>Category</th>
@@ -20,7 +19,7 @@
   <tfoot>
     <tr>
       <th id="total" colspan="2">Total :</th>
-      <td><%= transTotal  %></td>
+      <td><%= @total_amount %></td>
     </tr>
    </tfoot>
 

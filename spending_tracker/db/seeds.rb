@@ -41,7 +41,8 @@ transaction3.save()
 
  customer1 = Customer.new({
   "name" => "Sree" ,
-  "wallet" =>500
+  "wallet" =>500 ,
+  "budget" =>250
   })
 
  customer1.save()
