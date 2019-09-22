@@ -1,4 +1,5 @@
 
+
 <table>
   <tr>
     <th>Category</th>
@@ -8,8 +9,15 @@
   <%@transactions.each do |transaction|%>
   <tr>
     <td><%=transaction.category_name %></td>
-    <td><%= transaction.merchant_name %></td>
+      <td> <%= transaction.merchant_name %></td>
       <td><%= transaction.amount %></td>
   </tr>
   <% end %>
+  <tfoot>
+    <tr>
+      <th id="total" colspan="2">Total :</th>
+      <td><%= TransactionDto.total_amount  %></td>
+    </tr>
+   </tfoot>
+
 </table>

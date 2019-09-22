@@ -1,5 +1,5 @@
 require_relative('../db/sql_runner')
-class MerchantDto
+class GroupByMerchantDto
   attr_accessor :merchant_name ,:amount , :frequency
   def initialize(args)
     @frequency = args['frequency']

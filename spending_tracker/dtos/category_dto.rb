@@ -1,8 +1,9 @@
 require_relative('../db/sql_runner')
 class CategoryDto
-  attr_accessor :category_name ,:amount
+  attr_accessor :id ,:name
   def initialize(args)
-    @category_name = args['category_name']
-    @amount = args['amount'].to_f
+    p "neee#{args}"
+    @id = args['id']
+    @name = args['name']
   end
 end

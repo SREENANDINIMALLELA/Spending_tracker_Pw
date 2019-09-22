@@ -1,0 +1,32 @@
+<form  method="post" action="/spending_tracker/transactions">
+  <label for="categories">Category :</label>
+  <select id="categories" name="category_id">
+    <%@categories.each do |category|%>
+      <option value=<%= p category.id %>> <%=category.name %></option>
+    <% end %>
+    </select>
+      <label for="merchants">Merchant :</label>
+    <select id="merchants" name="merchant_id">
+      <%@merchants.each do |merchant|%>
+        <option value=<%=merchant.id %>> <%=merchant.name %></option>
+      <% end %>
+      </select>
+      <label for="amount">Amount</label>
+    <input id= "amount" type="number" name="amount" >
+    <input type="submit" value="Add transaction"/>
+
+</form>
+
+
+
+
+
+
+<!-- <select name="owner">
+<?php
+$sql = mysqli_query($connection, "SELECT username FROM users");
+while ($row = $sql->fetch_assoc()){
+echo "<option value=\"owner1\">" . $row['username'] . "</option>";
+}
+?>
+</select> -->

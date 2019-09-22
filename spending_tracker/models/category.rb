@@ -2,7 +2,9 @@ require_relative('../db/sql_runner')
 class Category
   attr_accessor :name
   attr_reader :id
+
   def initialize(options)
+     @id = options['id'].to_i if options['id']
     @name =options['name']
   end
   def save()
@@ -19,11 +21,15 @@ class Category
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
+  def self.find_by_name()
+    sql ="SELECT name FROM categories"
+    results = SqlRunner.run( sql )
 
+  end
   def self.all()
     sql = "SELECT * FROM categories"
     results = SqlRunner.run( sql )
-    return results.map { |category| Category.new( category) }
+    return results.map { |category| CategoryDto.new( category) }
   end
 
   def self.delete_all()

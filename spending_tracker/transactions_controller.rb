@@ -4,14 +4,21 @@ require_relative( 'models/transaction' )
 require_relative( 'models/merchant' )
 require_relative( 'models/category' )
 require_relative( 'dtos/transaction_dto' )
+require_relative( 'dtos/groupby_category_dto' )
+require_relative( 'dtos/groupby_merchant_dto' )
 require_relative( 'dtos/category_dto' )
-require_relative( 'dtos/merchant_dto' )
+
 also_reload( '../models/*' )
 
 get '/spending_tracker' do
  @transactions = Transaction.all()
-
+ p @transactions
 erb(:'transaction/show_all')
+end
+get '/spending_tracker/transactions' do
+ @categories = Category.all()
+ @merchants = Merchant.all()
+erb(:'transaction/new')
 end
 
 get '/spending_tracker/category' do
@@ -40,4 +47,9 @@ post'/spending_tracker/category'do
 category = Category.new(params)
 category.save
 erb(:"category/create")
+end
+post'/spending_tracker/transactions'do
+transaction = Transaction.new(params)
+transaction.save
+erb(:"transaction/create")
 end
