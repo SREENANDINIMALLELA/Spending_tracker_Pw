@@ -5,12 +5,15 @@
     <th>Category</th>
     <th>Merchant</th>
     <th>Amount</th>
+    <th>Transaction added date </th>
   </tr>
   <%@transactions.each do |transaction|%>
   <tr>
     <td><%=transaction.category_name %></td>
       <td> <%= transaction.merchant_name %></td>
       <td><%= transaction.amount %></td>
+      <td><%= transaction.date_time %></td>
+
   </tr>
   <% end %>
   <tfoot>

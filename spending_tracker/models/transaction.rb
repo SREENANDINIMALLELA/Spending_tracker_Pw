@@ -28,7 +28,7 @@ class Transaction
   end
 
   def self.all()
-    sql = "SELECT categories.name AS category_name , merchants.name as merchant_name , transactions.amount from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id;"
+    sql = "SELECT categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.date_time from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.date_time ;"
     results = SqlRunner.run( sql )
     return results.map { |transaction| TransactionDto.new( transaction ) }
   end

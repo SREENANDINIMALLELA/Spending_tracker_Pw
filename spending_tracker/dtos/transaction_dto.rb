@@ -1,13 +1,13 @@
 require_relative('../db/sql_runner')
 class TransactionDto
-  attr_accessor :category_name ,:merchant_name ,:amount
+  attr_accessor :category_name ,:merchant_name ,:amount ,:date_time
   @@total_amount = 0
 
   def initialize(args)
     @category_name = args['category_name']
     @merchant_name = args['merchant_name']
     @amount = args['amount'].to_f
-
+    @date_time = args['date_time']
     @@total_amount  = @@total_amount + @amount
   end
 
@@ -15,5 +15,5 @@ class TransactionDto
  def self.total_amount
    @@total_amount
  end
- 
+
 end

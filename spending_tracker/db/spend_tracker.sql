@@ -17,5 +17,5 @@ CREATE TABLE transactions(
   category_id INT4 REFERENCES categories(id),
   merchant_id INT4 REFERENCES merchants(id),
   amount INT4,
-  ts TIMESTAMP DEFAULT LOCALTIMESTAMP
+  date_time TIMESTAMP DEFAULT LOCALTIMESTAMP
 );
