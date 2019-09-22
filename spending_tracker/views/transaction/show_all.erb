@@ -1,4 +1,6 @@
 
+<% transTotal = TransactionDto.total_amount%>
+<p> Remaining Balance : <%=  p @customer.wallet - transTotal %></p>
 
 <table>
   <tr>
@@ -13,13 +15,12 @@
       <td> <%= transaction.merchant_name %></td>
       <td><%= transaction.amount %></td>
       <td><%= transaction.date_time %></td>
-
   </tr>
   <% end %>
   <tfoot>
     <tr>
       <th id="total" colspan="2">Total :</th>
-      <td><%= TransactionDto.total_amount  %></td>
+      <td><%= transTotal  %></td>
     </tr>
    </tfoot>
 

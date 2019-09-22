@@ -3,16 +3,20 @@ require( 'sinatra/contrib/all' )
 require_relative( 'models/transaction' )
 require_relative( 'models/merchant' )
 require_relative( 'models/category' )
+require_relative( 'models/customer' )
 require_relative( 'dtos/transaction_dto' )
 require_relative( 'dtos/groupby_category_dto' )
 require_relative( 'dtos/groupby_merchant_dto' )
 require_relative( 'dtos/category_dto' )
+require_relative( 'dtos/customer_dto' )
 
 also_reload( '../models/*' )
 
 get '/spending_tracker' do
  @transactions = Transaction.all()
- p @transactions
+ @customer = Customer.find(7)
+ 
+
 erb(:'transaction/show_all')
 end
 get '/spending_tracker/transactions' do

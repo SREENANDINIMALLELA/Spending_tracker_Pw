@@ -1,10 +1,12 @@
 require_relative('../models/merchant')
 require_relative('../models/category')
 require_relative('../models/transaction')
+require_relative('../models/customer')
 require('pry')
 Transaction.delete_all
 Merchant.delete_all
 Category.delete_all
+Customer.delete_all
 
 catogory1 = Category.new({"name" => "groceries"})
 catogory2 = Category.new({"name" => "fuel"})
@@ -35,3 +37,11 @@ transaction2=Transaction.new({
 transaction1.save()
 transaction2.save()
 transaction3.save()
+
+
+ customer1 = Customer.new({
+  "name" => "Sree" ,
+  "wallet" =>500
+  })
+
+ customer1.save()

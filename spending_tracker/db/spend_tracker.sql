@@ -1,6 +1,7 @@
 DROP TABLE transactions;
 DROP TABLE merchants;
 DROP TABLE categories ;
+DROP TABLE customers;
 
 CREATE TABLE categories (
   id serial4 ,
@@ -9,7 +10,7 @@ CREATE TABLE categories (
 );
 CREATE TABLE merchants (
   id serial4 primary key ,
-      name varchar(255) NOT NULL UNIQUE
+  name varchar(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE transactions(
@@ -18,4 +19,10 @@ CREATE TABLE transactions(
   merchant_id INT4 REFERENCES merchants(id),
   amount INT4,
   date_time TIMESTAMP DEFAULT LOCALTIMESTAMP
+);
+CREATE TABLE Customers(
+  id serial4 primary key,
+    name varchar(255),
+    wallet INT8
+
 );
