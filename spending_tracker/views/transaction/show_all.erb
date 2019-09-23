@@ -1,19 +1,20 @@
-
 <p> Your Balance : <%= @customer.wallet - @total_amount %></p>
 <p> Remainig preference budget : <%= @customer.budget - @total_amount  %></p>
+
+
 <table>
   <tr>
-    <th>Category</th>
+    <th>Transaction date </th>
     <th>Merchant</th>
+
     <th>Amount</th>
-    <th>Transaction added date </th>
   </tr>
   <%@transactions.each do |transaction|%>
   <tr>
-    <td><%=transaction.category_name %></td>
+      <td><%= transaction.date_time %></td>
       <td> <%= transaction.merchant_name %></td>
       <td><%= transaction.amount %></td>
-      <td><%= transaction.date_time %></td>
+      <td><a href="/spending_tracker/merchant/<%= transaction.merchant_name%>">details</a></td>
   </tr>
   <% end %>
   <tfoot>

@@ -24,6 +24,6 @@ CREATE TABLE Customers(
   id serial4 primary key,
     name varchar(255),
     wallet INT8 ,
-    budget INT8 
+    budget INT8
 
 );

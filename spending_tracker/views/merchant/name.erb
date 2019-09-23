@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>merchant</th>
+    <th>Amount</th>
+    <th>frequency</th>
+
+  </tr>
+  <%@transactions.each do |transaction|%>
+  <tr>
+    <td><%=transaction.merchant_name %></td>
+    <td><%= transaction.amount %></td>
+    <td><%= transaction.frequency %></td>
+
+  </tr>
+  <% end %>
+</table>

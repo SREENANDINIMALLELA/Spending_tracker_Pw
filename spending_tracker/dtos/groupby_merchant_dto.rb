@@ -5,6 +5,5 @@ class GroupByMerchantDto
     @frequency = args['frequency']
     @merchant_name = args['merchant_name']
     @amount = args['amount']
-
   end
 end

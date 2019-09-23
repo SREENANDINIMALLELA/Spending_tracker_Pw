@@ -1,5 +1,7 @@
 require( 'sinatra' )
+
 require( 'sinatra/contrib/all' )
+
 require_relative( 'models/transaction' )
 require_relative( 'models/merchant' )
 require_relative( 'models/category' )
@@ -10,6 +12,7 @@ require_relative( 'dtos/groupby_merchant_dto' )
 require_relative( 'dtos/category_dto' )
 require_relative( 'dtos/customer_dto' )
 require_relative( 'services/transaction_service' )
+require_relative( 'dtos/transaction_category_name_dto' )
 
 also_reload( '../models/*' )
 
@@ -17,7 +20,7 @@ get '/spending_tracker' do
  @transactions = TransactionService.getAllTransactions()
  @total_amount = TransactionService.getTotalAmount(@transactions)
  @customer = Customer.find(1)
-p @customer
+ @customer
 
 erb(:'transaction/show_all')
 end
@@ -54,6 +57,17 @@ category = Category.new(params)
 category.save
 erb(:"category/create")
 end
+get'/spending_tracker/category/:name'do
+@transactions = Transaction.find_transactions_by_category_name(params[:name])
+@transactions
+erb(:"category/name")
+end
+get'/spending_tracker/merchant/:name'do
+@transactions = Transaction.find_transactions_by_merchant_name(params[:name])
+p @transactions
+erb(:"merchant/name")
+end
+
 post'/spending_tracker/transactions'do
 transaction = Transaction.new(params)
 transaction.save
