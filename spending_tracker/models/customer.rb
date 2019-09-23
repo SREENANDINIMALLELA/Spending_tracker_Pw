@@ -37,13 +37,15 @@ class Customer
   end
 
   def self.find(id)
+    p "--------------->>>>> #{id}"
     sql = "SELECT * FROM customers
     WHERE id = $1"
     values = [id]
-    results =  SqlRunner.run( sql, values )
+     results =  SqlRunner.run( sql, values )
     cust = results.map { |customer| CustomerDto.new(customer) }
-
-  return  cust.first()
+   cus = cust.first()
+   p cus
+  return cus
   end
 
 end

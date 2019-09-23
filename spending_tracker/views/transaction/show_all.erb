@@ -3,25 +3,31 @@
 
 
 <table>
+  <thead>
   <tr>
     <th>Transaction date </th>
     <th>Merchant</th>
+    <th>Category</th>
 
     <th>Amount</th>
   </tr>
+    </thead>
+    <tbody>
+
   <%@transactions.each do |transaction|%>
   <tr>
-      <td><%= transaction.date_time %></td>
-      <td> <%= transaction.merchant_name %></td>
-      <td><%= transaction.amount %></td>
-      <td><a href="/spending_tracker/merchant/<%= transaction.merchant_name%>">more details </a></td>
+    <td><%= transaction.transaction_date%></td>
+    <td> <%= transaction.merchant_name %></td>
+    <td> <%= transaction.category_name %></td>
+    <td><%= transaction.amount %></td>
+    <td><a href="/spending_tracker/merchant/<%= transaction.merchant_name%>">more details </a></td>
   </tr>
+    </tbody>
   <% end %>
-  <tfoot>
+
     <tr>
-      <th id="total" colspan="2">Total :</th>
+      <th id="total" colspan="2"></th>
+      <td><h3>Total</h3></td>
       <td><%= @total_amount %></td>
     </tr>
-   </tfoot>
-
 </table>

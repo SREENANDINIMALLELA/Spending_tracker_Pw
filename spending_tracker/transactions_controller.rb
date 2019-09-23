@@ -20,7 +20,7 @@ get '/spending_tracker' do
  @transactions = TransactionService.getAllTransactions()
  @total_amount = TransactionService.getTotalAmount(@transactions)
  @customer = Customer.find(1)
- @customer
+p "ffffff#{ @customer}"
 
 erb(:'transaction/show_all')
 end

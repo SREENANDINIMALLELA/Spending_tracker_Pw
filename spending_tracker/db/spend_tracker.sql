@@ -18,12 +18,12 @@ CREATE TABLE transactions(
   category_id INT4 REFERENCES categories(id),
   merchant_id INT4 REFERENCES merchants(id),
   amount INT4,
-  date_time TIMESTAMP DEFAULT LOCALTIMESTAMP
+  transaction_date DATE NOT NULL 
 );
+
 CREATE TABLE Customers(
   id serial4 primary key,
     name varchar(255),
     wallet INT8 ,
     budget INT8
-
 );
