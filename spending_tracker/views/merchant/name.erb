@@ -1,16 +1,7 @@
-<table>
-  <tr>
-    <th>merchant</th>
-    <th>Amount</th>
-    <th>frequency</th>
+<%@transactions.each do |transaction|%>
+<h2><%=transaction.merchant_name%></h2>
 
-  </tr>
-  <%@transactions.each do |transaction|%>
-  <tr>
-    <td><%=transaction.merchant_name %></td>
-    <td><%= transaction.amount %></td>
-    <td><%= transaction.frequency %></td>
+<p>Total amount spent on this shop : <%= transaction.amount %> </p>
+<p>Number of vistis in this month  : <%= transaction.frequency %> </p>
 
-  </tr>
   <% end %>
-</table>

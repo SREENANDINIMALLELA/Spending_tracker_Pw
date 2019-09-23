@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -16,50 +16,50 @@
       <a href="/spending_tracker/category" >view by category</a>
     </div>
 
+  </body> -->
 
-<h2>Tabs</h2>
-<p>Click on the buttons inside the tabbed menu:</p>
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo1')">Tokyo</button>
-</div>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>spending_tracker</title>
+    <h1> Spending Tracker </h1>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Special+Elite" rel="stylesheet">
 
-<div id="London" class="tabcontent">
-  <h3>All Transactions</h3>
-  <a href="/spending_tracker" >All Transactions </a>
-</div>
+    <link rel="icon" href="/images/hazard.png" />
 
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <a href="/spending_tracker/transactions" >Add Transactions </a>
-</div>
-
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <a href="/spending_tracker/merchant" >view by merchant</a>
-</div>
-
-<div id="Tokyo1" class="tabcontent">
-  <h3>Tokyo1</h3>
-  <a href="/spending_tracker/category" >view by category</a>
-<script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-</script>
- <%=yield%>
-
+    <link rel="stylesheet" type="text/css" href="/styles/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/styles/forms.css">
+    <link rel="stylesheet" type="text/css" href="/styles/structure.css">
+    <link rel="stylesheet" type="text/css" href="/styles/tables.css">
+  </head>
+  <body>
+  <main class="flex flex--row">
+    <nav>
+      <ul>
+        <li>
+          <a href="/spending_tracker">All Transactions</a>
+        </li>
+        <li>
+          <a href="/spending_tracker/transactions">Add Transactions</a>
+        </li>
+        <li>
+          <a href="/spending_tracker/merchant">view by merchant</a>
+        </li>
+        <li>
+          <a href="/spending_tracker/category">View by category</a>
+        </li>
+        <li>
+          <a href="/spending_tracker/category/new">Create Category</a>
+        </li>
+        <li>
+          <a href="/spending_tracker/merchant/new">Create Merchant</a>
+        </li>
+      </ul>
+    </nav>
+    <section id="content">
+    <%= yield %>
+    </section>
+    </main>
   </body>
+  </html>

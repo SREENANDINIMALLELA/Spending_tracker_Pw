@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Spending Tracker</title>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Special+Elite" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="/styles/style.css">
+   <h1> Spending Tracker </h1>
+  </head>
+  <body>
+    <!-- <body>
+      <div>
+      <h3 class="transactions">Menu</h3>
+      <a href="/spending_tracker" >All Transactions </a>
+      <a href="/spending_tracker/transactions" >Add Transactions </a>
+      <a href="/spending_tracker/merchant" >view by merchant</a>
+      <a href="/spending_tracker/category" >view by category</a>
+    </div> -->
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo1')">Tokyo</button>
+
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>All Transactions</h3>
+  <a href="/spending_tracker" >All Transactions </a>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <a href="/spending_tracker/transactions" >Add Transactions </a>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <a href="/spending_tracker/merchant" >view by merchant</a>
+</div>
+
+<div id="Tokyo1" class="tabcontent">
+  <h3>Tokyo1</h3>
+  <a href="/spending_tracker/category" >view by category</a>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+  <%=yield%>
+
+  </body>
