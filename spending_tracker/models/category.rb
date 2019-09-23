@@ -21,10 +21,13 @@ class Category
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
-  def self.find_by_name()
-    sql ="SELECT name FROM categories"
-    results = SqlRunner.run( sql )
-
+  def self.find_by_name(name )
+    sql ="SELECT id FROM categories where name = $1"
+    values = [name]
+    results = SqlRunner.run( sql ,values)
+    categories =  results.map { |category|CategoryDto.new(category) }
+    p categories
+    return categories.first()
   end
   def self.all()
     sql = "SELECT * FROM categories"
@@ -38,10 +41,12 @@ class Category
   end
 
   def self.find(id)
-    sql = "DELETE FROM categories
+    sql = "select name FROM categories
     WHERE id = $1"
     values = [id]
-    SqlRunner.run( sql, values )
+    results = SqlRunner.run( sql, values )
+    return results.map { |category|Category.new(category) }
   end
+
 
 end

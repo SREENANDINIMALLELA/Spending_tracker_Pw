@@ -21,6 +21,7 @@
     <td> <%= transaction.category_name %></td>
     <td><%= transaction.amount %></td>
     <td><a href="/spending_tracker/merchant/<%= transaction.merchant_name%>">more details </a></td>
+    <td><a href="/spending_tracker/category/<%= transaction.id%>/edit">update category</a></td>
   </tr>
     </tbody>
   <% end %>

@@ -17,38 +17,29 @@ require_relative( 'dtos/transaction_category_name_dto' )
 also_reload( '../models/*' )
 
 get '/spending_tracker' do
- @transactions = TransactionService.getAllTransactions()
- @total_amount = TransactionService.getTotalAmount(@transactions)
- @customer = Customer.find(1)
-p "ffffff#{ @customer}"
-
-erb(:'transaction/show_all')
+  @transactions = TransactionService.getAllTransactions()
+  @total_amount = TransactionService.getTotalAmount(@transactions)
+  @customer = Customer.find(1)
+  erb(:'transaction/show_all')
 end
 get '/spending_tracker/transactions' do
- @categories = Category.all()
- @merchants = Merchant.all()
-erb(:'transaction/new')
+  @categories = Category.all()
+  @merchants = Merchant.all()
+  erb(:'transaction/new')
 end
+post'/spending_tracker/transactions'do
+transaction = Transaction.new(params)
+transaction.save
+erb(:"transaction/create")
+end
+
+
+
 
 get '/spending_tracker/category' do
- @transactions = Transaction.find_transactions_by_category()
-erb(:'category/show_by_category')
+  @transactions = Transaction.find_transactions_by_category()
+  erb(:'category/show_by_category')
 end
-
-get '/spending_tracker/merchant' do
-@transactions = Transaction.find_transactions_by_merchant()
-erb(:"merchant/show_by_merchant")
-end
-
-get'/spending_tracker/merchant/new'do
-erb(:"merchant/new")
-end
-post'/spending_tracker/merchant'do
-merchant = Merchant.new(params)
-merchant.save
-erb(:"merchant/create")
-end
-
 get'/spending_tracker/category/new'do
 erb(:"category/new")
 end
@@ -62,14 +53,43 @@ get'/spending_tracker/category/:name'do
 @transactions
 erb(:"category/name")
 end
+
+
+
+
+
 get'/spending_tracker/merchant/:name'do
 @transactions = Transaction.find_transactions_by_merchant_name(params[:name])
-p @transactions
 erb(:"merchant/name")
 end
+get '/spending_tracker/merchant' do
+  @transactions = Transaction.find_transactions_by_merchant()
+  erb(:"merchant/show_by_merchant")
+end
+get'/spending_tracker/merchant/new'do
+erb(:"merchant/new")
+end
+post'/spending_tracker/merchant'do
+merchant = Merchant.new(params)
+merchant.save
+erb(:"merchant/create")
+end
 
-post'/spending_tracker/transactions'do
-transaction = Transaction.new(params)
-transaction.save
-erb(:"transaction/create")
+
+
+
+
+get'/spending_tracker/category/:id/edit'do
+@categories = Category.all()
+@id = params[:id]
+erb(:"transaction/edit")
+end
+
+
+post'/spending_tracker/category/edit'do
+category_id = params[:category_id]
+id = params[:id]
+Transaction.update_category(id, category_id)
+erb(:"transaction/update")
+
 end

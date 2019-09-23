@@ -33,9 +33,23 @@ class Transaction
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
+  def self.update_category(id,category_id)
+    p id
+    p category_id
+
+      sql = "UPDATE transactions
+      SET
+      category_id
+       =
+       $1  
+      WHERE id = $2"
+      values = [category_id,id]
+      SqlRunner.run( sql, values )
+  end
+
 
   def self.get_all_transactions()
-    sql = "SELECT categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.transaction_date  ;"
+    sql = "SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.transaction_date  ;"
 
     results = SqlRunner.run( sql )
     result = results.map { |transaction| TransactionDto.new( transaction ) }
@@ -48,21 +62,21 @@ class Transaction
   end
 
   def self.find(id)
-    sql = "DELETE FROM transactions
+    sql = "SELECT * FROM transactions
     WHERE id = $1"
     values = [id]
     SqlRunner.run( sql, values )
   end
   def self.find_transactions_by_category()
     sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name"
-     results = SqlRunner.run( sql)
-   return results.map { |transaction| GroupByCategoryDto.new( transaction ) }
+    results = SqlRunner.run( sql)
+    return results.map { |transaction| GroupByCategoryDto.new( transaction ) }
   end
   def self.find_transactions_by_category_name(name)
     sql="SELECT categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id where categories.name = $1 order by transactions.transaction_date ;"
     values = [name]
-     results = SqlRunner.run( sql,values )
-     result = results.map { |transaction| TransactionDto.new( transaction ) }
+    results = SqlRunner.run( sql,values )
+    p result = results.map { |transaction| TransactionDto.new( transaction ) }
     return result
   end
   def self.find_transactions_by_merchant()
@@ -71,14 +85,12 @@ class Transaction
     return results.map { |transaction| GroupByMerchantDto.new( transaction ) }
   end
   def self.find_transactions_by_merchant_name(name)
-    p name
     sql ="SELECT count (merchants.name) as frequency , merchants.name as merchant_name , SUM( transactions.amount) as amount  FROM transactions INNER JOIN merchants ON transactions.merchant_id = merchants.id where merchants.name = $1 GROUP BY  merchants.name"
     values = [name]
     results=SqlRunner.run( sql , values)
-    p "emroiiiii"
-result  = results.map { |transaction| GroupByMerchantDto.new( transaction ) }
-p result
- return result
+    result  = results.map { |transaction| GroupByMerchantDto.new( transaction ) }
+
+    return result
   end
   def self.find(transaction_date )
     sql = "SELECT (SELECT transaction_date  FROM transactions WHERE id = @id )::timestamp::date"
@@ -86,5 +98,13 @@ p result
     SqlRunner.run( sql, values )
 
   end
+  def self.find_trasaction_wit_id_category_name(id,name)
+    sql ="SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id where transactions.id = $1 And categories.name = $2 order by transactions.transaction_date "
+    values = [id,name]
+    results=SqlRunner.run( sql , values)
+    result  = results.map { |transaction| TransactionDto.new( transaction ) }
 
-end
+    return result
+  end
+
+  end

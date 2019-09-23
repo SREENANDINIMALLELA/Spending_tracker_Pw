@@ -1,0 +1,12 @@
+
+
+<form  method="post" action="/spending_tracker/category/edit">
+<input id= "id" type="hidden" name="id" value= <%=@id%>>
+  <label for="categories">Category :</label>
+  <select id="categories" name="category_id">
+    <%@categories.each do |category|%>
+      <option value=<%= category.id %>> <%=category.name %></option>
+    <% end %>
+    </select>
+    <input type="submit" value="Update transaction"/>
+</form>

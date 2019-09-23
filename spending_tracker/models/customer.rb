@@ -37,7 +37,6 @@ class Customer
   end
 
   def self.find(id)
-    p "--------------->>>>> #{id}"
     sql = "SELECT * FROM customers
     WHERE id = $1"
     values = [id]
