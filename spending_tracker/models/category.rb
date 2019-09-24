@@ -47,6 +47,15 @@ class Category
     results = SqlRunner.run( sql, values )
     return results.map { |category|Category.new(category) }
   end
-
-
+  def self.delete_by_id(id)
+    sql = "DELETE FROM categories where id = $1"
+    values=[id]
+    SqlRunner.run(sql,values)
+  end
+def self.find_by_id(id)
+  sql ="select * from categories where id  = $1"
+  values = [id]
+  results = SqlRunner.run( sql, values )
+  return results.map { |category|Category.new(category)}
+end
 end

@@ -1,7 +1,7 @@
 require_relative('../db/sql_runner')
 require ('date')
 class Transaction
-  attr_accessor :merchant_id , :amount,:category_id,:transaction_date
+  attr_accessor :merchant_id , :amount,:category_id,:transaction_date , :category_count
   attr_reader :id
   def initialize(options)
     # @id = options['id'].to_i()
@@ -41,7 +41,7 @@ class Transaction
       SET
       category_id
        =
-       $1  
+       $1
       WHERE id = $2"
       values = [category_id,id]
       SqlRunner.run( sql, values )
@@ -59,6 +59,10 @@ class Transaction
   def self.delete_all()
     sql = "DELETE FROM transactions"
     SqlRunner.run( sql )
+  end
+  def self.delete(id)
+    sql = "DELETE FROM transactions where id = $1"
+    SqlRunner.run( sql , [id] )
   end
 
   def self.find(id)
@@ -92,12 +96,7 @@ class Transaction
 
     return result
   end
-  def self.find(transaction_date )
-    sql = "SELECT (SELECT transaction_date  FROM transactions WHERE id = @id )::timestamp::date"
-    values = [id]
-    SqlRunner.run( sql, values )
 
-  end
   def self.find_trasaction_wit_id_category_name(id,name)
     sql ="SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id where transactions.id = $1 And categories.name = $2 order by transactions.transaction_date "
     values = [id,name]
@@ -105,6 +104,14 @@ class Transaction
     result  = results.map { |transaction| TransactionDto.new( transaction ) }
 
     return result
+  end
+  def self.check_tansaction_id(id)
+    sql ="select count (category_id) as category_count from transactions where category_id = $1;"
+    values = [id]
+    results=SqlRunner.run( sql , values)
+    category_count = results.first()['category_count'].to_i
+    return category_count
+    # return results.map{ |transaction| TransDto.new( transaction ) }
   end
 
   end

@@ -1,16 +1,17 @@
 require( 'sinatra' )
-
 require( 'sinatra/contrib/all' )
-
+require('pry')
 require_relative( 'models/transaction' )
 require_relative( 'models/merchant' )
 require_relative( 'models/category' )
 require_relative( 'models/customer' )
 require_relative( 'dtos/transaction_dto' )
+# require_relative( 'dtos/trans_dto' )
 require_relative( 'dtos/groupby_category_dto' )
 require_relative( 'dtos/groupby_merchant_dto' )
 require_relative( 'dtos/category_dto' )
 require_relative( 'dtos/customer_dto' )
+
 require_relative( 'services/transaction_service' )
 require_relative( 'dtos/transaction_category_name_dto' )
 
@@ -33,14 +34,12 @@ transaction.save
 erb(:"transaction/create")
 end
 
-
-
-
 get '/spending_tracker/category' do
   @transactions = Transaction.find_transactions_by_category()
   erb(:'category/show_by_category')
 end
 get'/spending_tracker/category/new'do
+@categories = Category.all()
 erb(:"category/new")
 end
 post'/spending_tracker/category'do
@@ -91,5 +90,26 @@ category_id = params[:category_id]
 id = params[:id]
 Transaction.update_category(id, category_id)
 erb(:"transaction/update")
+end
 
+
+
+post '/spending_tracker/category/:id' do
+id = params[:id]
+@transaction = Transaction.check_tansaction_id(id)
+@transaction
+ if (@transaction != 0 )
+   erb(:"category/notdelete")
+ elsif(@transaction  == 0)
+  Category.delete_by_id(id)
+ erb(:"category/delete")
+end
+end
+
+
+post '/spending_tracker/transaction/:id' do
+
+id = params[:id]
+Transaction.delete(id)
+ erb(:"transaction/delete")
 end
