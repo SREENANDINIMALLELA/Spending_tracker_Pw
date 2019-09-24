@@ -79,20 +79,36 @@ end
 
 
 
+#
+# get'/spending_tracker/category/:id/edit'do
+# @categories = Category.all()
+# @id = params[:id]
+# erb(:"transaction/edit")
+# end
 
-get'/spending_tracker/category/:id/edit'do
+
+get'/spending_tracker/transaction/:id/edit'do
 @categories = Category.all()
-@id = params[:id]
+@merchants = Merchant.all()
+id = params[:id]
+@transaction = Transaction.find(id)
+p "pppppppppppp#{@transaction}"
 erb(:"transaction/edit")
 end
 
+post'/spending_tracker/transaction/:id/edit'do
 
-post'/spending_tracker/category/edit'do
-category_id = params[:category_id]
-id = params[:id]
-Transaction.update_category(id, category_id)
+# transaction= Transaction.find(params[:id])
+Transaction.update(params)
 erb(:"transaction/update")
 end
+
+# post'/spending_tracker/category/edit'do
+# category_id = params[:category_id]
+# id = params[:id]
+# Transaction.update_category(id, category_id)
+# erb(:"transaction/update")
+# end
 
 
 
@@ -120,7 +136,6 @@ end
 
 
 post '/spending_tracker/transaction/:id' do
-
   id = params[:id]
   Transaction.delete(id)
   erb(:"transaction/delete")

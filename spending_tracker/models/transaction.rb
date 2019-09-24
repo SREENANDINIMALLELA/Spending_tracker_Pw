@@ -4,7 +4,7 @@ class Transaction
   attr_accessor :merchant_id , :amount,:category_id,:transaction_date , :category_count
   attr_reader :id
   def initialize(options)
-    # @id = options['id'].to_i()
+    @id = options['id'].to_i() if options['id']
     @category_id = options['category_id'].to_i
     @merchant_id = options['merchant_id'].to_i
     @amount= options['amount'].to_i
@@ -39,13 +39,56 @@ class Transaction
 
       sql = "UPDATE transactions
       SET
-      category_id
+      category_id ,
+      merchant_id ,
+      amount,
+      transaction_date
        =
-       $1
-      WHERE id = $2"
+         $1,$2,$3,$4
+      WHERE id = $5"
       values = [category_id,id]
       SqlRunner.run( sql, values )
   end
+  def self.update(params)
+     sql = "UPDATE transactions
+    SET
+    (
+      category_id ,
+      merchant_id ,
+      amount,
+      transaction_date
+    ) =
+    (
+      $1, $2, $3, $4
+    )
+    WHERE id = $5"
+    values = [params[:category_id],params[:merchant_id],params[:amount],params[:transaction_date], params[:id]]
+    SqlRunner.run( sql, values )
+  end
+  def self.update_transaction(params,id)
+          sql = "UPDATE transactions
+          SET
+          category_id ,
+          merchant_id ,
+          amount,
+          transaction_date
+           =
+           $1,$2,$3,$4
+          WHERE id = $5"
+          values = [params[:category_id],params[:merchant_id],params[:amount],params[:transaction_date],id]
+          SqlRunner.run( sql, values )
+  end
+  def self.all()
+    sql = "SELECT * from transactions ;"
+    results = SqlRunner.run( sql )
+    result = results.map { |transaction| TransactionDto.new( transaction ) }
+    return result
+  end
+
+
+
+
+
 
 
   def self.get_all_transactions()
@@ -69,7 +112,9 @@ class Transaction
     sql = "SELECT * FROM transactions
     WHERE id = $1"
     values = [id]
-    SqlRunner.run( sql, values )
+    results = SqlRunner.run( sql, values )
+    result = results.map { |transaction| Transaction.new( transaction ) }
+    return result.first()
   end
   def self.find_transactions_by_category()
     sql="SELECT categories.name as category_name ,SUM( transactions.amount) as amount FROM transactions INNER JOIN categories ON transactions.category_id = categories.id GROUP BY categories.name"

@@ -1,15 +1,13 @@
-<p> Your Balance : <%= @customer.wallet - @total_amount %></p>
-<p> Remainig preference budget : <%= @customer.budget - @total_amount  %></p>
 
 
 <table>
   <thead>
   <tr>
-    <th>Transaction date </th>
-    <th>Merchant</th>
-    <th>Category</th>
+    <th><h3>Transaction date </h3></th>
+    <th><h3>Merchant</h3></th>
+    <th><h3>Category</h3></th>
 
-    <th>Amount</th>
+    <th><h3>Amount</h3></th>
   </tr>
     </thead>
     <tbody>
@@ -21,7 +19,7 @@
     <td> <%= transaction.category_name %></td>
     <td><%= transaction.amount %></td>
     <td><button type="button" name="merchant_name"><a href="/spending_tracker/merchant/<%= transaction.merchant_name%>">more details </a></button></td>
-    <td><button type="button" name="button"><a href="/spending_tracker/category/<%= transaction.id%>/edit" >update category</a></button></td>
+    <td><button type="button" name="button"><a href="/spending_tracker/transaction/<%= transaction.id%>/edit" >update</a></button></td>
     <td>
       <form  method="post" action="/spending_tracker/transaction/<%= transaction.id%>" >
       <input type="submit" value="Delete"/>
@@ -34,6 +32,6 @@
     <tr>
       <th id="total" colspan="2"></th>
       <td><h3>Total</h3></td>
-      <td><%= @total_amount %></td>
+      <td><h3><%= @total_amount %></h3></td>
     </tr>
 </table>
