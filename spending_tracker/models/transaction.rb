@@ -111,7 +111,14 @@ class Transaction
     results=SqlRunner.run( sql , values)
     category_count = results.first()['category_count'].to_i
     return category_count
-    # return results.map{ |transaction| TransDto.new( transaction ) }
   end
+  def self.check_tansaction_merchant_id(id)
+    sql ="select count (merchant_id) as merchant_count from transactions where merchant_id = $1;"
+    values = [id]
+    results=SqlRunner.run( sql , values)
+    merchant_count = results.first()['merchant_count'].to_i
+    return merchant_count
+  end
+
 
   end

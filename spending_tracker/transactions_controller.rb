@@ -55,8 +55,10 @@ end
 
 
 
-
-
+get '/spending_tracker/merchant/new' do
+  @merchants = Merchant.all()
+  erb(:"merchant/new")
+end
 get'/spending_tracker/merchant/:name'do
 @transactions = Transaction.find_transactions_by_merchant_name(params[:name])
 erb(:"merchant/name")
@@ -65,9 +67,9 @@ get '/spending_tracker/merchant' do
   @transactions = Transaction.find_transactions_by_merchant()
   erb(:"merchant/show_by_merchant")
 end
-get'/spending_tracker/merchant/new'do
-erb(:"merchant/new")
-end
+
+
+
 post'/spending_tracker/merchant'do
 merchant = Merchant.new(params)
 merchant.save
@@ -95,21 +97,31 @@ end
 
 
 post '/spending_tracker/category/:id' do
-id = params[:id]
-@transaction = Transaction.check_tansaction_id(id)
-@transaction
- if (@transaction != 0 )
-   erb(:"category/notdelete")
- elsif(@transaction  == 0)
-  Category.delete_by_id(id)
- erb(:"category/delete")
+  id = params[:id]
+  @transaction = Transaction.check_tansaction_id(id)
+  @transaction
+  if (@transaction != 0 )
+    erb(:"category/notdelete")
+  elsif(@transaction  == 0)
+    Category.delete_by_id(id)
+    erb(:"category/delete")
+  end
 end
+post '/spending_tracker/merchant/:id' do
+  id = params[:id]
+  @transaction = Transaction.check_tansaction_merchant_id(id)
+  if (@transaction != 0 )
+    erb(:"merchant/notdelete")
+  elsif(@transaction  == 0)
+    Category.delete_by_id(id)
+    erb(:"merchant/delete")
+  end
 end
 
 
 post '/spending_tracker/transaction/:id' do
 
-id = params[:id]
-Transaction.delete(id)
- erb(:"transaction/delete")
+  id = params[:id]
+  Transaction.delete(id)
+  erb(:"transaction/delete")
 end
