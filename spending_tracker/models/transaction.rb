@@ -17,8 +17,6 @@ class Transaction
       merchant_id ,
       amount,
       transaction_date
-
-
     )
     VALUES
     (
@@ -30,9 +28,6 @@ class Transaction
     @id = results.first()['id'].to_i
   end
   def self.update_category(id,category_id)
-    p id
-    p category_id
-
     sql = "UPDATE transactions
     SET
     category_id ,
@@ -81,12 +76,6 @@ class Transaction
       return result
     end
 
-
-
-
-
-
-
     def self.get_all_transactions()
       sql = "SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.transaction_date DESC ;"
 
@@ -109,7 +98,7 @@ class Transaction
       WHERE id = $1"
       values = [id]
       results = SqlRunner.run( sql, values )
-      result = results.map { |transaction| Transaction.new( transaction ) }
+      result = results.map { |transaction| TransactionidDto.new( transaction ) }
       return result.first()
     end
     def self.find_transactions_by_category()
@@ -134,7 +123,6 @@ class Transaction
       values = [name]
       results=SqlRunner.run( sql , values)
       result  = results.map { |transaction| GroupByMerchantDto.new( transaction ) }
-
       return result
     end
 
