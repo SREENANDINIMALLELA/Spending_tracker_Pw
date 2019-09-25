@@ -37,6 +37,7 @@ transaction.save
 end
 
 get '/spending_tracker/category' do
+  # @transactions = TransactionService.getAllTransactions()
   @transactions = Transaction.find_transactions_by_category()
   erb(:'category/show_by_category')
 end
