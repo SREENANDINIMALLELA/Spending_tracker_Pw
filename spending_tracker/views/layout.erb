@@ -9,13 +9,13 @@
     <h1> Spending Tracker </h1>
     <h2>Welcome Sree</h2>
 
-  <%@transactions = TransactionService.getAllTransactions()
-  @total_amount = TransactionService.getTotalAmount(@transactions)
-  @customer = Customer.find(1)%>
-  <h4 class =" balance"> Your Balance : <%= @customer.wallet - @total_amount %></h4>
-  <h4 class =" balance"> amount spent: <%= @total_amount  %></h4>
-  <h4 class =" balance"> Remaining preference budget :<mark> <%= @customer.budget - @total_amount  %></mark></h4>
-</div>
+    <%@transactions = TransactionService.getAllTransactions()
+    @total_amount = TransactionService.getTotalAmount(@transactions)
+    @customer = Customer.find(1)%>
+    <h4 class =" balance"> Your Balance : <%= @customer.wallet - @total_amount %></h4>
+    <h4 class =" balance"> amount spent: <%= @total_amount  %></h4>
+    <h4 class =" balance"> Remaining preference budget :<mark> <%= @customer.budget - @total_amount  %></mark></h4>
+  </div>
 
 
 
