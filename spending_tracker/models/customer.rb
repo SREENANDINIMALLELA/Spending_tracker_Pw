@@ -1,7 +1,7 @@
 require_relative('../db/sql_runner')
 class Customer
   attr_accessor :name , :wallet , :budget
-   attr_reader :id
+  attr_reader :id
   def initialize(options)
     p options
     @name = options['name']
@@ -19,10 +19,10 @@ class Customer
       $1 , $2 ,$3
     )
     RETURNING id
-  "
+    "
     values = [@name , @wallet , @budget]
-   results = SqlRunner.run(sql, values)
-  @id = results.first()['id'].to_i
+    results = SqlRunner.run(sql, values)
+    @id = results.first()['id'].to_i
   end
 
   def self.all()
@@ -40,11 +40,11 @@ class Customer
     sql = "SELECT * FROM customers
     WHERE id = $1"
     values = [id]
-     results =  SqlRunner.run( sql, values )
+    results =  SqlRunner.run( sql, values )
     cust = results.map { |customer| CustomerDto.new(customer) }
-   cus = cust.first()
-   p cus
-  return cus
+    cus = cust.first()
+    p cus
+    return cus
   end
 
 end

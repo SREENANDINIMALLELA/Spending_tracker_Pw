@@ -1,10 +1,10 @@
 
 <table>
   <thead>
-  <tr>
-    <th><h3>Category</h3></th>
-    <th><h3>Amount</h3></th>
-  </tr>
+    <tr>
+      <th><h3>Category</h3></th>
+      <th><h3>Amount</h3></th>
+    </tr>
   </thead>
   <tbody>
     <%@transactions.each do |transaction|%>
@@ -14,6 +14,6 @@
       <td><a href="/spending_tracker/category/<%= transaction.category_name%>">details</a></td>
     </tr>
 
-      </tbody>
-    <% end %>
+  </tbody>
+  <% end %>
 </table>

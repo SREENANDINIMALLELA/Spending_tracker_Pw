@@ -4,7 +4,7 @@ class Category
   attr_reader :id
 
   def initialize(options)
-     @id = options['id'].to_i if options['id']
+    @id = options['id'].to_i if options['id']
     @name =options['name']
   end
   def save()
@@ -52,10 +52,10 @@ class Category
     values=[id]
     SqlRunner.run(sql,values)
   end
-def self.find_by_id(id)
-  sql ="select * from categories where id  = $1"
-  values = [id]
-  results = SqlRunner.run( sql, values )
-  return results.map { |category|Category.new(category)}
-end
+  def self.find_by_id(id)
+    sql ="select * from categories where id  = $1"
+    values = [id]
+    results = SqlRunner.run( sql, values )
+    return results.map { |category|Category.new(category)}
+  end
 end

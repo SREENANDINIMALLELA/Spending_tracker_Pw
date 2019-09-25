@@ -26,23 +26,14 @@ transaction1=Transaction.new({
   "category_id" => catogory1.id ,
   "amount" => 10 ,"transaction_date" => '2019-08-28'})
 
-# transaction2=Transaction.new({
-#   "merchant_id" => merchant2.id ,
-#   "category_id" => catogory2.id ,
-#   "amount" => 40 })
-#   transaction3=Transaction.new({
-#     "merchant_id" => merchant1.id ,
-#     "category_id" => catogory2.id ,
-#     "amount" => 60 , "transaction_date" => 2019-09-23})
-transaction1.save()
-# transaction2.save()
-# transaction3.save()
+  transaction1.save()
 
 
- customer1 = Customer.new({
-  "name" => "Sree" ,
-  "wallet" =>500 ,
-  "budget" =>250
-  })
 
- customer1.save()
+  customer1 = Customer.new({
+    "name" => "Sree" ,
+    "wallet" =>500 ,
+    "budget" =>250
+    })
+
+    customer1.save()

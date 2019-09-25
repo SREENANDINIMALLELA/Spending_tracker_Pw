@@ -1,7 +1,7 @@
 <form  method="post" action="/spending_tracker/category" >
   <label for="category_name">Category</label>
   <input id= "category_name" type="text" name="name" >
-    <input type="submit" value="create category"/>
+  <input type="submit" value="create category"/>
 </form>
 
 
@@ -10,7 +10,7 @@
 <p><%=category.name%> </p>
 
 <form  method="post" action="/spending_tracker/category/<%= category.id%>" >
-    <input type="submit" value="delete category"/>
+  <input type="submit" value="delete category"/>
 </form>
 
 <% end %>

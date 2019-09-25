@@ -1,7 +1,7 @@
 <form  method="post" action="/spending_tracker/transactions">
 
 
-<label for="merchants">Merchant :</label>
+  <label for="merchants">Merchant :</label>
   <select id="merchants" name="merchant_id">
     <%@merchants.each do |merchant|%>
     <option value=<%=merchant.id %>> <%=merchant.name %></option>
@@ -27,30 +27,30 @@
 
 <table>
   <thead>
-  <tr>
-    <th><h3>Transaction date</h3></th>
-    <th><h3>Merchant</h3></th>
-    <th><h3>Category</h3></th>
+    <tr>
+      <th><h3>Transaction date</h3></th>
+      <th><h3>Merchant</h3></th>
+      <th><h3>Category</h3></th>
 
-    <th><h3>Amount</h3></th>
-  </tr>
-    </thead>
-    <tbody>
-
-  <%@transactions.each do |transaction|%>
-  <tr>
-    <td><%= transaction.transaction_date%></td>
-    <td> <%= transaction.merchant_name %></td>
-    <td> <%= transaction.category_name %></td>
-    <td><%= transaction.amount %></td>
-
-    <td><button type="button" name="button"><a href="/spending_tracker/transaction/<%= transaction.id%>/edit" >Edit</a></button></td>
-    <td>
-      <form  method="post" action="/spending_tracker/transaction/<%= transaction.id%>" >
-      <input type="submit" value="Delete"/>
-      </form>
-    </td>
+      <th><h3>Amount</h3></th>
     </tr>
-    </tbody>
+  </thead>
+  <tbody>
+
+    <%@transactions.each do |transaction|%>
+    <tr>
+      <td><%= transaction.transaction_date%></td>
+      <td> <%= transaction.merchant_name %></td>
+      <td> <%= transaction.category_name %></td>
+      <td><%= transaction.amount %></td>
+
+      <td><button type="button" name="button"><a href="/spending_tracker/transaction/<%= transaction.id%>/edit" >Edit</a></button></td>
+      <td>
+        <form  method="post" action="/spending_tracker/transaction/<%= transaction.id%>" >
+          <input type="submit" value="Delete"/>
+        </form>
+      </td>
+    </tr>
+  </tbody>
   <% end %>
 </table>

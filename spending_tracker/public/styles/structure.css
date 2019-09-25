@@ -2,8 +2,8 @@ body {
   background:white;
   background-size: 100%;
   background-repeat: no-repeat;
-color: white;
-font-family: 'Merriweather', serif; */
+  color: white;
+  font-family: 'Merriweather', serif; */
   padding: 0px;
   margin: 0px;
 }
@@ -61,7 +61,7 @@ nav {
   padding-right:25px;
 }
 
- nav ul li {
+nav ul li {
   margin-bottom: 15px;
   text-transform: uppercase;
 }

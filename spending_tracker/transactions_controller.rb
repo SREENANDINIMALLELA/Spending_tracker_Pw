@@ -10,10 +10,8 @@ require_relative( 'dtos/groupby_category_dto' )
 require_relative( 'dtos/groupby_merchant_dto' )
 require_relative( 'dtos/category_dto' )
 require_relative( 'dtos/customer_dto' )
-
 require_relative( 'services/transaction_service' )
 require_relative( 'dtos/transaction_category_name_dto' )
-
 also_reload( '../models/*' )
 
 get '/spending_tracker' do
@@ -22,33 +20,46 @@ get '/spending_tracker' do
   @customer = Customer.find(1)
   erb(:'transaction/show_all')
 end
+
+
+
 get '/spending_tracker/transactions' do
   @transactions = TransactionService.getAllTransactions()
   @categories = Category.all()
   @merchants = Merchant.all()
   erb(:'transaction/new')
-
 end
+
+
+
 post'/spending_tracker/transactions'do
 transaction = Transaction.new(params)
 transaction.save
-  redirect to '/spending_tracker/transactions'
+redirect to '/spending_tracker/transactions'
 end
 
+
+
 get '/spending_tracker/category' do
-  # @transactions = TransactionService.getAllTransactions()
   @transactions = Transaction.find_transactions_by_category()
   erb(:'category/show_by_category')
 end
+
+
+
 get'/spending_tracker/category/new'do
 @categories = Category.all()
 erb(:"category/new")
 end
+
+
 post'/spending_tracker/category'do
 category = Category.new(params)
 category.save
 redirect to '/spending_tracker/transactions'
 end
+
+
 get'/spending_tracker/category/:name'do
 @transactions = Transaction.find_transactions_by_category_name(params[:name])
 @transactions
