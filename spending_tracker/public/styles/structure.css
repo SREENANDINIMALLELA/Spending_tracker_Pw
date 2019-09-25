@@ -25,6 +25,12 @@ h3 {
 }
 h4.balance{
   text-align:right;
+  color: blue;
+}
+h5{
+  font-size: 1.23em;
+  color: blue;
+  margin-bottom: 20px;
 }
 
 

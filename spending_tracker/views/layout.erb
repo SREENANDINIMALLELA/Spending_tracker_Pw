@@ -8,21 +8,18 @@
 
     <h1> Spending Tracker </h1>
     <h2>Welcome Sree</h2>
-  </div>
+
   <%@transactions = TransactionService.getAllTransactions()
   @total_amount = TransactionService.getTotalAmount(@transactions)
   @customer = Customer.find(1)%>
-  <h4 class =" balance"> Your Balance : <mark><%= @customer.wallet - @total_amount %></mark></h4>
-  <h4 class =" balance"> amount spent:<mark> <%= @total_amount  %></mark></h4>
+  <h4 class =" balance"> Your Balance : <%= @customer.wallet - @total_amount %></h4>
+  <h4 class =" balance"> amount spent: <%= @total_amount  %></h4>
   <h4 class =" balance"> Remaining preference budget :<mark> <%= @customer.budget - @total_amount  %></mark></h4>
-
+</div>
 
 
 
   <link href="https://fonts.googleapis.com/css?family=Merriweather|Special+Elite" rel="stylesheet">
-
-  <link rel="stylesheet" type="text/css" href="/styles/buttons.css">
-  <link rel="stylesheet" type="text/css" href="/styles/forms.css">
   <link rel="stylesheet" type="text/css" href="/styles/structure.css">
   <link rel="stylesheet" type="text/css" href="/styles/tables.css">
   <link rel="stylesheet" type="text/css" href="/styles/search.css">
