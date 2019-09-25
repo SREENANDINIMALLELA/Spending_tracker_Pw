@@ -24,14 +24,16 @@ get '/spending_tracker' do
   erb(:'transaction/show_all')
 end
 get '/spending_tracker/transactions' do
+  @transactions = TransactionService.getAllTransactions()
   @categories = Category.all()
   @merchants = Merchant.all()
   erb(:'transaction/new')
+
 end
 post'/spending_tracker/transactions'do
 transaction = Transaction.new(params)
 transaction.save
-erb(:"transaction/create")
+  redirect to '/spending_tracker/transactions'
 end
 
 get '/spending_tracker/category' do
@@ -45,7 +47,7 @@ end
 post'/spending_tracker/category'do
 category = Category.new(params)
 category.save
-erb(:"category/create")
+redirect to '/spending_tracker/transactions'
 end
 get'/spending_tracker/category/:name'do
 @transactions = Transaction.find_transactions_by_category_name(params[:name])
@@ -73,18 +75,10 @@ end
 post'/spending_tracker/merchant'do
 merchant = Merchant.new(params)
 merchant.save
-erb(:"merchant/create")
+redirect to '/spending_tracker/transactions'
 end
 
 
-
-
-#
-# get'/spending_tracker/category/:id/edit'do
-# @categories = Category.all()
-# @id = params[:id]
-# erb(:"transaction/edit")
-# end
 
 
 get'/spending_tracker/transaction/:id/edit'do
@@ -92,25 +86,13 @@ get'/spending_tracker/transaction/:id/edit'do
 @merchants = Merchant.all()
 id = params[:id]
 @transaction = Transaction.find(id)
-p "pppppppppppp#{@transaction}"
 erb(:"transaction/edit")
 end
 
 post'/spending_tracker/transaction/:id/edit'do
-
-# transaction= Transaction.find(params[:id])
 Transaction.update(params)
-erb(:"transaction/update")
+redirect to '/spending_tracker'
 end
-
-# post'/spending_tracker/category/edit'do
-# category_id = params[:category_id]
-# id = params[:id]
-# Transaction.update_category(id, category_id)
-# erb(:"transaction/update")
-# end
-
-
 
 post '/spending_tracker/category/:id' do
   id = params[:id]
@@ -121,6 +103,8 @@ post '/spending_tracker/category/:id' do
   elsif(@transaction  == 0)
     Category.delete_by_id(id)
     erb(:"category/delete")
+    r
+
   end
 end
 post '/spending_tracker/merchant/:id' do
@@ -139,4 +123,5 @@ post '/spending_tracker/transaction/:id' do
   id = params[:id]
   Transaction.delete(id)
   erb(:"transaction/delete")
+  redirect to '/spending_tracker/transactions'
 end

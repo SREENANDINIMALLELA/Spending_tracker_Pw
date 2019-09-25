@@ -92,7 +92,7 @@ class Transaction
 
 
   def self.get_all_transactions()
-    sql = "SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.transaction_date  ;"
+    sql = "SELECT  transactions.id, categories.name AS category_name , merchants.name as merchant_name , transactions.amount , transactions.transaction_date  from transactions inner join merchants on transactions.merchant_id = merchants.id inner join categories on transactions.category_id =categories.id order by transactions.transaction_date DESC ;"
 
     results = SqlRunner.run( sql )
     result = results.map { |transaction| TransactionDto.new( transaction ) }

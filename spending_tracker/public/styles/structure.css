@@ -1,11 +1,16 @@
 body {
-  background: #CD994C;
+  background:white;
   background-size: 100%;
   background-repeat: no-repeat;
 color: white;
 font-family: 'Merriweather', serif; */
   padding: 0px;
   margin: 0px;
+}
+.header {
+  background-color: skyblue;
+  padding: 20px;
+  text-align: center;
 }
 
 h1, h2{
@@ -18,10 +23,15 @@ h3 {
   color: #a22a2a;
   margin-bottom: 20px;
 }
+h4.balance{
+  text-align:right;
+}
+
 
 h4 {
-  font-size: 1.40em;
+  font-size: 1em;
   color: #108097;
+
   margin-bottom: 20px;
 }
 h1 {
@@ -62,7 +72,7 @@ main {
 
 .flex {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 
 }
 
@@ -72,5 +82,6 @@ main {
 
 #content {
   border-left: 1px solid darkred;
+  color: #108E64;
   padding-left: 25px;
 }

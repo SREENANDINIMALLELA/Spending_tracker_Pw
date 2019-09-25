@@ -1,34 +1,24 @@
 
-
 <table>
   <thead>
-  <tr>
-    <th><h3>Transaction date </h3></th>
-    <th><h3>Merchant</h3></th>
-    <th><h3>Category</h3></th>
-
-    <th><h3>Amount</h3></th>
-  </tr>
-    </thead>
-    <tbody>
-
-  <%@transactions.each do |transaction|%>
-  <tr>
-    <td><%= transaction.transaction_date%></td>
-    <td> <%= transaction.merchant_name %></td>
-    <td> <%= transaction.category_name %></td>
-    <td><%= transaction.amount %></td>
-    <td><button type="button" name="merchant_name"><a href="/spending_tracker/merchant/<%= transaction.merchant_name%>">more details </a></button></td>
-    <td><button type="button" name="button"><a href="/spending_tracker/transaction/<%= transaction.id%>/edit" >update</a></button></td>
-    <td>
-      <form  method="post" action="/spending_tracker/transaction/<%= transaction.id%>" >
-      <input type="submit" value="Delete"/>
-      </form>
-    </td>
+    <tr>
+      <th><h3>Transaction date </h3></th>
+      <th><h3>Merchant</h3></th>
+      <th><h3>Category</h3></th>
+      <th><h3>Amount</h3></th>
     </tr>
-    </tbody>
-  <% end %>
+  </thead>
+  <tbody>
 
+    <%@transactions.each do |transaction|%>
+    <tr>
+      <td><%= transaction.transaction_date%></td>
+      <td> <%= transaction.merchant_name %></td>
+      <td> <%= transaction.category_name %></td>
+      <td><%= transaction.amount %></td>
+    </tr>
+  </tbody>
+    <% end %>
     <tr>
       <th id="total" colspan="2"></th>
       <td><h3>Total</h3></td>
